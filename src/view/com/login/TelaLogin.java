@@ -47,17 +47,14 @@ public class TelaLogin extends javax.swing.JFrame {
     public void salvarUserLogs() {
         con.getConectar();
         try {
-            con.executarSql("select u.id ,u.login, u.password, u.perfil, f.id ,f.nome, f.funcao, f.telefone \n"
-                    + "from tb_user u \n"
-                    + "inner join tb_funcionario f \n"
-                    + "on u.id_funcionario = f.id where u.login ='" + txtLogin.getText() + "'");
+            con.executarSql("SELECT a.nome_admin, a.cpf_admin, a.email_admin, a.senha_admin, a.telefone_admin, a.cargo_admin FROM admins a where a.cpf_admin ='" + txtLogin.getText() + "'");
             con.getResultSet().first();
-            codUser = con.getResultSet().getInt("u.id");
-            nomeUser_login = con.getResultSet().getString("f.nome");
-            PreparedStatement pst = con.con.prepareStatement("insert into tb_userlogs (id_user, login, nome) values(?,?,?)");
-            pst.setInt(1, codUser);
+           
+            nomeUser_login = con.getResultSet().getString("a.nome_admin");
+            PreparedStatement pst = con.con.prepareStatement("insert into ultimologin (nome_login, cpf_login) values(?,?)");
+           
+            pst.setString(1, nomeUser_login);
             pst.setString(2, txtLogin.getText());
-            pst.setString(3, nomeUser_login);
             pst.execute();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro em salvar" + e);
@@ -382,10 +379,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
         try {
-            con.executarSql("select u.login, u.password, u.perfil, f.nome, f.funcao, f.telefone \n"
-                    + "from tb_user u \n"
-                    + "inner join tb_funcionario f \n"
-                    + "on u.id_funcionario = f.id where u.login = '" + txtLogin.getText() + "'");
+            con.executarSql("SELECT a.nome_admin, a.cpf_admin, a.email_admin, a.senha_admin, a.telefone_admin, a.cargo_admin FROM admins a where a.cpf_admin = '" + txtLogin.getText() + "'");
             con.getResultSet().first();
             if (txtLogin.getText().equals("   .   .   -  ")) {
                 erroSenha();
@@ -395,10 +389,10 @@ public class TelaLogin extends javax.swing.JFrame {
                 erroSenha();
                 Mensagem_preencha_senha();
                 txtsenha.requestFocus();
-            } else if (con.getResultSet().getString("password").equals(txtsenha.getText())) {
+            } else if (con.getResultSet().getString("senha_admin").equals(txtsenha.getText())) {
                 salvarUserLogs();
                 Main telamenu = new Main();
-                telamenu.usuário = con.getResultSet().getString("login");
+                telamenu.usuário = con.getResultSet().getString("cpf_admin");
                 telamenu.setVisible(true);
                 dispose();
             } else {

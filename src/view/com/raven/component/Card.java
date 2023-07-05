@@ -52,7 +52,7 @@ public final class Card extends javax.swing.JPanel {
         setOpaque(false);
         color1 = Color.BLACK;
         color2 = Color.WHITE;
-        TotalClientes();
+//        TotalClientes();
     }
 
     public void setData(ModelCard data) {
@@ -124,20 +124,20 @@ public final class Card extends javax.swing.JPanel {
         super.paintComponent(grphcs);
     }
 
-    public void TotalClientes() {
-        con.getConectar();
-        con.executarSql("SELECT count(*) AS customerCount FROM tb_clientes;");
-        try {
-            con.getResultSet().first();
-            do {
-                int count = con.getResultSet().getInt("customerCount");
-                
-                lbValues.setText(String.valueOf(count));
-            } while (con.getResultSet().next());
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro na Consulta /nErro!" + e);
-        }
-    }
+//    public void TotalClientes() {
+//        con.getConectar();
+//        con.executarSql("SELECT count(*) AS customerCount FROM tb_clientes;");
+//        try {
+//            con.getResultSet().first();
+//            do {
+//                int count = con.getResultSet().getInt("customerCount");
+//                
+//                lbValues.setText(String.valueOf(count));
+//            } while (con.getResultSet().next());
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "Erro na Consulta /nErro!" + e);
+//        }
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lbIcon;
     private javax.swing.JLabel lbTitle;

@@ -41,7 +41,7 @@ public final class CardVendas extends javax.swing.JPanel {
         initComponents();
         txtData_refeicao.setVisible(false);
         setOpaque(false);
-        tabela_cliente_titular("SELECT * FROM tb_clientes order by nome_cliente");
+//        tabela_cliente_titular("SELECT * FROM tb_clientes order by nome_cliente");
 
         // A  linha Abaixo exibe a Data Atual do Sistema.
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -51,55 +51,55 @@ public final class CardVendas extends javax.swing.JPanel {
     }
 
     //TABELA CARREGANDO DADOS DOS CLIENTES
-    public final void tabela_cliente_titular(String Sql) {
-        spTableCliente_Titular.setVerticalScrollBar(new ScrollBar());
-        spTableCliente_Titular.getVerticalScrollBar().setBackground(Color.WHITE);
-        spTableCliente_Titular.getViewport().setBackground(Color.WHITE);
-
-        JPanel p = new JPanel();
-        p.setBackground(Color.WHITE);
-        spTableCliente_Titular.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-
-        ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"ID", "NOME", "CPF", "RG", "IDADE", "GÊNERO"};
-        con.getConectar();
-        con.executarSql(Sql);
-        //Inserir dados na tabela
-        try {
-            con.getResultSet().first();
-            do {
-                dados.add(new Object[]{con.getResultSet().getInt("id_clientes"),
-                    con.getResultSet().getString("nome_cliente"),
-                    con.getResultSet().getString("cpf_cliente"),
-                    con.getResultSet().getString("rg_cliente"),
-                    con.getResultSet().getInt("idade_cliente"),
-                    con.getResultSet().getString("genero")
-                });
-            } while (con.getResultSet().next());
-        } catch (SQLException e) {
-
-        }
-
-        TabelaUniversal tabela = new TabelaUniversal(dados, colunas);
-
-        table_cliente_Titular.setModel(tabela);
-        table_cliente_Titular.getColumnModel().getColumn(0).setPreferredWidth(50);
-        table_cliente_Titular.getColumnModel().getColumn(0).setResizable(false);
-        table_cliente_Titular.getColumnModel().getColumn(1).setPreferredWidth(187);
-        table_cliente_Titular.getColumnModel().getColumn(1).setResizable(false);
-        table_cliente_Titular.getColumnModel().getColumn(2).setPreferredWidth(100);
-        table_cliente_Titular.getColumnModel().getColumn(2).setResizable(false);
-        table_cliente_Titular.getColumnModel().getColumn(3).setPreferredWidth(100);
-        table_cliente_Titular.getColumnModel().getColumn(3).setResizable(false);
-        table_cliente_Titular.getColumnModel().getColumn(4).setPreferredWidth(45);
-        table_cliente_Titular.getColumnModel().getColumn(4).setResizable(false);
-        table_cliente_Titular.getColumnModel().getColumn(5).setPreferredWidth(90);
-        table_cliente_Titular.getColumnModel().getColumn(5).setResizable(false);
-        table_cliente_Titular.getTableHeader().setReorderingAllowed(false);
-        table_cliente_Titular.setAutoResizeMode(table_cliente_Titular.AUTO_RESIZE_OFF);
-        table_cliente_Titular.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-    }
+//    public final void tabela_cliente_titular(String Sql) {
+//        spTableCliente_Titular.setVerticalScrollBar(new ScrollBar());
+//        spTableCliente_Titular.getVerticalScrollBar().setBackground(Color.WHITE);
+//        spTableCliente_Titular.getViewport().setBackground(Color.WHITE);
+//
+//        JPanel p = new JPanel();
+//        p.setBackground(Color.WHITE);
+//        spTableCliente_Titular.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+//
+//        ArrayList dados = new ArrayList();
+//        String[] colunas = new String[]{"ID", "NOME", "CPF", "RG", "IDADE", "GÊNERO"};
+//        con.getConectar();
+//        con.executarSql(Sql);
+//        //Inserir dados na tabela
+//        try {
+//            con.getResultSet().first();
+//            do {
+//                dados.add(new Object[]{con.getResultSet().getInt("id_clientes"),
+//                    con.getResultSet().getString("nome_cliente"),
+//                    con.getResultSet().getString("cpf_cliente"),
+//                    con.getResultSet().getString("rg_cliente"),
+//                    con.getResultSet().getInt("idade_cliente"),
+//                    con.getResultSet().getString("genero")
+//                });
+//            } while (con.getResultSet().next());
+//        } catch (SQLException e) {
+//
+//        }
+//
+//        TabelaUniversal tabela = new TabelaUniversal(dados, colunas);
+//
+//        table_cliente_Titular.setModel(tabela);
+//        table_cliente_Titular.getColumnModel().getColumn(0).setPreferredWidth(50);
+//        table_cliente_Titular.getColumnModel().getColumn(0).setResizable(false);
+//        table_cliente_Titular.getColumnModel().getColumn(1).setPreferredWidth(187);
+//        table_cliente_Titular.getColumnModel().getColumn(1).setResizable(false);
+//        table_cliente_Titular.getColumnModel().getColumn(2).setPreferredWidth(100);
+//        table_cliente_Titular.getColumnModel().getColumn(2).setResizable(false);
+//        table_cliente_Titular.getColumnModel().getColumn(3).setPreferredWidth(100);
+//        table_cliente_Titular.getColumnModel().getColumn(3).setResizable(false);
+//        table_cliente_Titular.getColumnModel().getColumn(4).setPreferredWidth(45);
+//        table_cliente_Titular.getColumnModel().getColumn(4).setResizable(false);
+//        table_cliente_Titular.getColumnModel().getColumn(5).setPreferredWidth(90);
+//        table_cliente_Titular.getColumnModel().getColumn(5).setResizable(false);
+//        table_cliente_Titular.getTableHeader().setReorderingAllowed(false);
+//        table_cliente_Titular.setAutoResizeMode(table_cliente_Titular.AUTO_RESIZE_OFF);
+//        table_cliente_Titular.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//
+//    }
 
     //METODO PARA SALVAR SENHAS TITULADAS
     public void salvarSenhas() {
@@ -148,7 +148,7 @@ public final class CardVendas extends javax.swing.JPanel {
         titular.setPesquisar(txtPesquisarNomeClientes.getText());
         titular = titularDao.buscarClientes(titular);
         id_clientes = Integer.parseInt((String.valueOf(titular.getId())));
-        tabela_cliente_titular("SELECT * FROM tb_clientes where nome_cliente like '%" + titular.getPesquisar() + "%'");
+//        tabela_cliente_titular("SELECT * FROM tb_clientes where nome_cliente like '%" + titular.getPesquisar() + "%'");
     }
 
     @SuppressWarnings("unchecked")
@@ -298,22 +298,22 @@ public final class CardVendas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void table_cliente_TitularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_cliente_TitularMouseClicked
-        String nome = "" + table_cliente_Titular.getValueAt(table_cliente_Titular.getSelectedRow(), 1);
-        con.getConectar();
-        con.executarSql("SELECT * FROM tb_clientes where nome_cliente ='" + nome + "'");
-        try {
-            con.getResultSet().first();
-            txtCliente.setText(con.getResultSet().getString("nome_cliente"));
-            genero = con.getResultSet().getString("Genero");
-            idade = con.getResultSet().getString("idade_cliente");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro no ao selecionar os dados" + ex);
-        }
-        if (controllerSenha.controlVerificarSenhaCliente(table_cliente_Titular.getValueAt(table_cliente_Titular.getSelectedRow(), 1).toString())) {
-            JOptionPane.showMessageDialog(null, "Este cliente já comprou senha neste dia!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            txtCliente.setText("");
-            txtPesquisarNomeClientes.setText("");
-        }
+//        String nome = "" + table_cliente_Titular.getValueAt(table_cliente_Titular.getSelectedRow(), 1);
+//        con.getConectar();
+//        con.executarSql("SELECT * FROM tb_clientes where nome_cliente ='" + nome + "'");
+//        try {
+//            con.getResultSet().first();
+//            txtCliente.setText(con.getResultSet().getString("nome_cliente"));
+//            genero = con.getResultSet().getString("Genero");
+//            idade = con.getResultSet().getString("idade_cliente");
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Erro no ao selecionar os dados" + ex);
+//        }
+//        if (controllerSenha.controlVerificarSenhaCliente(table_cliente_Titular.getValueAt(table_cliente_Titular.getSelectedRow(), 1).toString())) {
+//            JOptionPane.showMessageDialog(null, "Este cliente já comprou senha neste dia!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+//            txtCliente.setText("");
+//            txtPesquisarNomeClientes.setText("");
+//        }
     }//GEN-LAST:event_table_cliente_TitularMouseClicked
 
     private void table_cliente_FamiliaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_cliente_FamiliaMouseClicked
@@ -367,7 +367,7 @@ public final class CardVendas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGenericoActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        tabela_cliente_titular("SELECT * FROM tb_clientes order by nome_cliente");
+//        tabela_cliente_titular("SELECT * FROM tb_clientes order by nome_cliente");
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void txtPesquisarNomeClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisarNomeClientesActionPerformed

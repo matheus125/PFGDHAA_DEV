@@ -23,7 +23,7 @@ public class RelatoriosDao extends ConexaoBD {
 
     ControllerSenha controllerSenha = new ControllerSenha();
     RefeicoesDao refeicoesDao = new RefeicoesDao();
-    FuncionarioDao funcionarioDao = new FuncionarioDao();
+//    FuncionarioDao funcionarioDao = new FuncionarioDao();
     ClientesDao clientesDao = new ClientesDao();
 
     public Relatorios lerParaOBl(Relatorios relatorio) {
@@ -163,8 +163,7 @@ public class RelatoriosDao extends ConexaoBD {
                         + "8 - Clientes acima de 60 anos Feminino: " + rs.getInt(6) + "\n"
                         + "9 - Senhas Genéricas: " + relatorios.getGenericos() + "\n\n"
                         + "10 - Refeições Servidas: " + refeicoesDao.retornarTotalServido() + "\n"
-                        + ocorrencias + "\n\n"
-                        + "EXPEDIENTE FECHADO POR: " + funcionarioDao.retornarUltimoLogin() + "\n DATA: " + dateFormat.format(date) + "\n\nPRATO CHEIO COROADO";
+                        + ocorrencias + "\n\n";
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro na consulta" + e.getMessage());

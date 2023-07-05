@@ -1,9 +1,7 @@
 package view.com.raven.main;
 
-import view.com.raven.event.EventMenuSelected;
+//import com.raven.event.EventMenuSelected;
 import com.raven.banco.ConexaoBD;
-import com.raven.swing.icon.GoogleMaterialDesignIcons;
-import com.raven.swing.icon.IconFontSwing;
 import view.com.raven.form.Form_Home;
 import java.awt.Color;
 import java.sql.PreparedStatement;
@@ -18,13 +16,22 @@ import view.com.raven.form.Form_Vendas;
 import view.com.raven.form.Form_ExpeSenhas;
 import view.com.login.TelaLogin;
 
+/**
+ *
+ * @author RAVEN
+ */
 public class Main extends javax.swing.JFrame {
 
     private Form_Home home;
+
     private Form_Funcionarios formFuncionarios;
-    private Form_Clientes formClientes;
-    private Form_Vendas formVendas;
-    private Form_ExpeSenhas form_ExpeSenhas;
+
+//    private Form_Clientes formClientes;
+//
+//    private Form_Vendas formVendas;
+//
+//    private Form_ExpeSenhas form_ExpeSenhas;
+//
     private TelaLogin telaLogin;
 
     int codUser;
@@ -35,19 +42,23 @@ public class Main extends javax.swing.JFrame {
 
     public Main() {
         initComponents();
-        //  Init google icon font
-        IconFontSwing.register(GoogleMaterialDesignIcons.getIconFont());
         lbusuarios.setVisible(false);
         con.getConectar();
         setBackground(new Color(0, 0, 0, 0));
-        home = new Form_Home();
-        formFuncionarios = new Form_Funcionarios();
-        formClientes = new Form_Clientes();
-        formVendas = new Form_Vendas();
-        form_ExpeSenhas = new Form_ExpeSenhas();
-        telaLogin = new TelaLogin();
 
+        home = new Form_Home();
+
+        formFuncionarios = new Form_Funcionarios();
+
+//        formClientes = new Form_Clientes();
+//
+//        formVendas = new Form_Vendas();
+//
+//        form_ExpeSenhas = new Form_ExpeSenhas();
+//
+        telaLogin = new TelaLogin();
         menu1.initMoving(Main.this);
+
         menu1.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
@@ -59,13 +70,13 @@ public class Main extends javax.swing.JFrame {
                         CheckLogin();
                         break;
                     case 2:
-                        setForm(formClientes);
+//                        setForm(formClientes);
                         break;
                     case 4:
-                        setForm(formVendas);
+//                        setForm(formVendas);
                         break;
                     case 5:
-                        setForm(form_ExpeSenhas);
+//                        setForm(form_ExpeSenhas);
                         break;
                     case 6:
                         int res = 0;
@@ -79,7 +90,6 @@ public class Main extends javax.swing.JFrame {
                         int resposta = 0;
                         resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente sair do sistema?");
                         if (resposta == JOptionPane.YES_OPTION) {
-                            salvarUserLogsExit();
                             System.exit(0);
                             con.getfecharConexao();
                         }
@@ -96,9 +106,9 @@ public class Main extends javax.swing.JFrame {
     private void CheckLogin() {
         try {
             Form_Funcionarios funcionarios = new Form_Funcionarios();
-            con.executarSql("select*from tb_user where login='" + lbusuarios.getText() + "'");
+            con.executarSql("select*from admins where cpf_admin='" + lbusuarios.getText() + "'");
             con.getResultSet().first();
-            if (con.getResultSet().getString("perfil").equals("Administrador")) {
+            if (con.getResultSet().getString("cargo_admin").equals("Administrador")) {
                 if (funcionarios == funcionarios) {
                     setForm(funcionarios);
                     funcionarios.setVisible(true);
@@ -113,28 +123,8 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
-    private void salvarUserLogsExit() {
-
-        con.getConectar();
-        try {
-            con.executarSql("select*from tb_userlogs where login='" + lbusuarios.getText() + "'");
-            con.getResultSet().last();
-            codUser = con.getResultSet().getInt("id");
-
-            PreparedStatement pst = con.con.prepareStatement("UPDATE tb_userlogs SET registration_date_update = CURRENT_TIMESTAMP WHERE id=?");
-
-            pst.setInt(1, codUser);
-            pst.execute();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro no update" + e);
-
-        }
-
-    }
-
     private void trocarUsuario() {
         telaLogin.setVisible(true);
-        salvarUserLogsExit();
         dispose();
     }
 
@@ -155,6 +145,7 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new view.com.raven.swing.PanelBorder();
+        header2 = new view.com.raven.component.Header();
         mainPanel = new javax.swing.JPanel();
         lbusuarios = new javax.swing.JLabel();
         menu1 = new view.com.raven.component.Menu();
@@ -168,6 +159,8 @@ public class Main extends javax.swing.JFrame {
         });
 
         panelBorder1.setBackground(new java.awt.Color(242, 238, 238));
+
+        header2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
 
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new java.awt.BorderLayout());
@@ -183,15 +176,20 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1095, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbusuarios))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addComponent(lbusuarios)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(header2, javax.swing.GroupLayout.PREFERRED_SIZE, 1095, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                .addComponent(lbusuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(header2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbusuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(menu1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -221,31 +219,29 @@ public class Main extends javax.swing.JFrame {
     public static void main(String args[]) {
         Long datetime = System.currentTimeMillis();
         Timestamp timestamp = new Timestamp(datetime);
-
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -258,6 +254,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.com.raven.component.Header header2;
     private javax.swing.JLabel lbusuarios;
     private javax.swing.JPanel mainPanel;
     private view.com.raven.component.Menu menu1;

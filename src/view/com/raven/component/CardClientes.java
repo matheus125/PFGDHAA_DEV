@@ -68,256 +68,256 @@ public class CardClientes extends javax.swing.JPanel {
         desabilitarBotao();
 
         //INICIALIZAÇÃO DE TABELAS AO LIGAR O SISTEMA.
-        tabela_cliente("SELECT * FROM tb_clientes");
-
-        tabela_cliente_dependente("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
-                + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
-                + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
-                + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
-
-        tabela_cliente_socio_economico("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
-                + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
-                + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
-                + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
-
-        tabela_cliente_socio_economico_Saude("select id_clientes, nome_cliente, cpf_cliente, rg_cliente, idade_cliente, genero from tb_clientes order by nome_cliente");
-
-        tabela_dependente();
+//        tabela_cliente("SELECT * FROM tb_clientes");
+//
+//        tabela_cliente_dependente("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
+//                + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
+//                + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
+//                + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
+//
+//        tabela_cliente_socio_economico("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
+//                + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
+//                + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
+//                + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
+//
+//        tabela_cliente_socio_economico_Saude("select id_clientes, nome_cliente, cpf_cliente, rg_cliente, idade_cliente, genero from tb_clientes order by nome_cliente");
+//
+//        tabela_dependente();
     }
     
 
     //TABELA CARREGANDO DADOS DOS CLIENTES NA GUIA CLIENTE
-    public final void tabela_cliente(String Sql) {
-        spTableCliente.setVerticalScrollBar(new ScrollBar());
-        spTableCliente.getVerticalScrollBar().setBackground(Color.WHITE);
-        spTableCliente.getViewport().setBackground(Color.WHITE);
-
-        JPanel p = new JPanel();
-        p.setBackground(Color.WHITE);
-        spTableCliente.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-
-        ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"ID", "Nome", "RG", "CPF", "DT NASCIMENTO", "TELEFONE"};
-
-        con.getConectar();
-        con.executarSql(Sql);
-        //Inserir dados na tabela
-        try {
-            con.getResultSet().first();
-            do {
-                dados.add(new Object[]{con.getResultSet().getInt("id_clientes"),
-                    con.getResultSet().getString("nome_cliente"),
-                    con.getResultSet().getString("cpf_cliente"),
-                    con.getResultSet().getString("rg_cliente"),
-                    con.getResultSet().getInt("idade_cliente"),
-                    con.getResultSet().getString("genero")});
-            } while (con.getResultSet().next());
-        } catch (SQLException e) {
-
-        }
-
-        TabelaUniversal tabela = new TabelaUniversal(dados, colunas);
-
-        table_cliente.setModel(tabela);
-        table_cliente.getColumnModel().getColumn(0).setPreferredWidth(30);
-        table_cliente.getColumnModel().getColumn(0).setResizable(false);
-        table_cliente.getColumnModel().getColumn(1).setPreferredWidth(190);
-        table_cliente.getColumnModel().getColumn(1).setResizable(false);
-        table_cliente.getColumnModel().getColumn(2).setPreferredWidth(120);
-        table_cliente.getColumnModel().getColumn(2).setResizable(false);
-        table_cliente.getColumnModel().getColumn(3).setPreferredWidth(115);
-        table_cliente.getColumnModel().getColumn(3).setResizable(false);
-        table_cliente.getColumnModel().getColumn(4).setPreferredWidth(140);
-        table_cliente.getColumnModel().getColumn(4).setResizable(false);
-        table_cliente.getColumnModel().getColumn(5).setPreferredWidth(168);
-        table_cliente.getColumnModel().getColumn(5).setResizable(false);
-        table_cliente.getTableHeader().setReorderingAllowed(false);
-        table_cliente.setAutoResizeMode(Table2.AUTO_RESIZE_OFF);
-        table_cliente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    }//FIM.
+//    public final void tabela_cliente(String Sql) {
+//        spTableCliente.setVerticalScrollBar(new ScrollBar());
+//        spTableCliente.getVerticalScrollBar().setBackground(Color.WHITE);
+//        spTableCliente.getViewport().setBackground(Color.WHITE);
+//
+//        JPanel p = new JPanel();
+//        p.setBackground(Color.WHITE);
+//        spTableCliente.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+//
+//        ArrayList dados = new ArrayList();
+//        String[] colunas = new String[]{"ID", "Nome", "RG", "CPF", "DT NASCIMENTO", "TELEFONE"};
+//
+//        con.getConectar();
+//        con.executarSql(Sql);
+//        //Inserir dados na tabela
+//        try {
+//            con.getResultSet().first();
+//            do {
+//                dados.add(new Object[]{con.getResultSet().getInt("id_clientes"),
+//                    con.getResultSet().getString("nome_cliente"),
+//                    con.getResultSet().getString("cpf_cliente"),
+//                    con.getResultSet().getString("rg_cliente"),
+//                    con.getResultSet().getInt("idade_cliente"),
+//                    con.getResultSet().getString("genero")});
+//            } while (con.getResultSet().next());
+//        } catch (SQLException e) {
+//
+//        }
+//
+//        TabelaUniversal tabela = new TabelaUniversal(dados, colunas);
+//
+//        table_cliente.setModel(tabela);
+//        table_cliente.getColumnModel().getColumn(0).setPreferredWidth(30);
+//        table_cliente.getColumnModel().getColumn(0).setResizable(false);
+//        table_cliente.getColumnModel().getColumn(1).setPreferredWidth(190);
+//        table_cliente.getColumnModel().getColumn(1).setResizable(false);
+//        table_cliente.getColumnModel().getColumn(2).setPreferredWidth(120);
+//        table_cliente.getColumnModel().getColumn(2).setResizable(false);
+//        table_cliente.getColumnModel().getColumn(3).setPreferredWidth(115);
+//        table_cliente.getColumnModel().getColumn(3).setResizable(false);
+//        table_cliente.getColumnModel().getColumn(4).setPreferredWidth(140);
+//        table_cliente.getColumnModel().getColumn(4).setResizable(false);
+//        table_cliente.getColumnModel().getColumn(5).setPreferredWidth(168);
+//        table_cliente.getColumnModel().getColumn(5).setResizable(false);
+//        table_cliente.getTableHeader().setReorderingAllowed(false);
+//        table_cliente.setAutoResizeMode(Table2.AUTO_RESIZE_OFF);
+//        table_cliente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//    }//FIM.
 
     //TABELA CARREGANDO DADOS DOS CLIENTES NA GUIA DEPENDENTES 
-    public final void tabela_cliente_dependente(String Sql) {
-        spTableCliente_dependente.setVerticalScrollBar(new ScrollBar());
-        spTableCliente_dependente.getVerticalScrollBar().setBackground(Color.WHITE);
-        spTableCliente_dependente.getViewport().setBackground(Color.WHITE);
-
-        JPanel p = new JPanel();
-        p.setBackground(Color.WHITE);
-        spTableCliente_dependente.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-
-        ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"ID", "Nome", "RG", "CPF", "DT NASCIMENTO", "TELEFONE", "ESTADO CIVIL", "STATUS"};
-
-        con.getConectar();
-        con.executarSql(Sql);
-        //Inserir dados na tabela
-        try {
-            con.getResultSet().first();
-            do {
-                dados.add(new Object[]{con.getResultSet().getInt("id"), con.getResultSet().getString("nome_Completo"),
-                    con.getResultSet().getString("rg"), con.getResultSet().getString("cpf"),
-                    con.getResultSet().getString("data_Nascimento"), con.getResultSet().getString("telefone"), con.getResultSet().getString("estado_Civil"),
-                    con.getResultSet().getString("status_Cliente")});
-            } while (con.getResultSet().next());
-        } catch (SQLException e) {
-
-        }
-
-        TabelaUniversal tabela = new TabelaUniversal(dados, colunas);
-
-        table_cliente_dependente.setModel(tabela);
-        table_cliente_dependente.getColumnModel().getColumn(0).setPreferredWidth(30);
-        table_cliente_dependente.getColumnModel().getColumn(0).setResizable(false);
-        table_cliente_dependente.getColumnModel().getColumn(1).setPreferredWidth(190);
-        table_cliente_dependente.getColumnModel().getColumn(1).setResizable(false);
-        table_cliente_dependente.getColumnModel().getColumn(2).setPreferredWidth(120);
-        table_cliente_dependente.getColumnModel().getColumn(2).setResizable(false);
-        table_cliente_dependente.getColumnModel().getColumn(3).setPreferredWidth(115);
-        table_cliente_dependente.getColumnModel().getColumn(3).setResizable(false);
-        table_cliente_dependente.getColumnModel().getColumn(4).setPreferredWidth(140);
-        table_cliente_dependente.getColumnModel().getColumn(4).setResizable(false);
-        table_cliente_dependente.getColumnModel().getColumn(5).setPreferredWidth(168);
-        table_cliente_dependente.getColumnModel().getColumn(5).setResizable(false);
-        table_cliente_dependente.getColumnModel().getColumn(6).setPreferredWidth(115);
-        table_cliente_dependente.getColumnModel().getColumn(6).setResizable(false);
-        table_cliente_dependente.getColumnModel().getColumn(7).setPreferredWidth(140);
-        table_cliente_dependente.getColumnModel().getColumn(7).setResizable(false);
-        table_cliente_dependente.getTableHeader().setReorderingAllowed(false);
-        table_cliente_dependente.setAutoResizeMode(table_cliente_dependente.AUTO_RESIZE_OFF);
-        table_cliente_dependente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    }//FIM.
+//    public final void tabela_cliente_dependente(String Sql) {
+//        spTableCliente_dependente.setVerticalScrollBar(new ScrollBar());
+//        spTableCliente_dependente.getVerticalScrollBar().setBackground(Color.WHITE);
+//        spTableCliente_dependente.getViewport().setBackground(Color.WHITE);
+//
+//        JPanel p = new JPanel();
+//        p.setBackground(Color.WHITE);
+//        spTableCliente_dependente.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+//
+//        ArrayList dados = new ArrayList();
+//        String[] colunas = new String[]{"ID", "Nome", "RG", "CPF", "DT NASCIMENTO", "TELEFONE", "ESTADO CIVIL", "STATUS"};
+//
+//        con.getConectar();
+//        con.executarSql(Sql);
+//        //Inserir dados na tabela
+//        try {
+//            con.getResultSet().first();
+//            do {
+//                dados.add(new Object[]{con.getResultSet().getInt("id"), con.getResultSet().getString("nome_Completo"),
+//                    con.getResultSet().getString("rg"), con.getResultSet().getString("cpf"),
+//                    con.getResultSet().getString("data_Nascimento"), con.getResultSet().getString("telefone"), con.getResultSet().getString("estado_Civil"),
+//                    con.getResultSet().getString("status_Cliente")});
+//            } while (con.getResultSet().next());
+//        } catch (SQLException e) {
+//
+//        }
+//
+//        TabelaUniversal tabela = new TabelaUniversal(dados, colunas);
+//
+//        table_cliente_dependente.setModel(tabela);
+//        table_cliente_dependente.getColumnModel().getColumn(0).setPreferredWidth(30);
+//        table_cliente_dependente.getColumnModel().getColumn(0).setResizable(false);
+//        table_cliente_dependente.getColumnModel().getColumn(1).setPreferredWidth(190);
+//        table_cliente_dependente.getColumnModel().getColumn(1).setResizable(false);
+//        table_cliente_dependente.getColumnModel().getColumn(2).setPreferredWidth(120);
+//        table_cliente_dependente.getColumnModel().getColumn(2).setResizable(false);
+//        table_cliente_dependente.getColumnModel().getColumn(3).setPreferredWidth(115);
+//        table_cliente_dependente.getColumnModel().getColumn(3).setResizable(false);
+//        table_cliente_dependente.getColumnModel().getColumn(4).setPreferredWidth(140);
+//        table_cliente_dependente.getColumnModel().getColumn(4).setResizable(false);
+//        table_cliente_dependente.getColumnModel().getColumn(5).setPreferredWidth(168);
+//        table_cliente_dependente.getColumnModel().getColumn(5).setResizable(false);
+//        table_cliente_dependente.getColumnModel().getColumn(6).setPreferredWidth(115);
+//        table_cliente_dependente.getColumnModel().getColumn(6).setResizable(false);
+//        table_cliente_dependente.getColumnModel().getColumn(7).setPreferredWidth(140);
+//        table_cliente_dependente.getColumnModel().getColumn(7).setResizable(false);
+//        table_cliente_dependente.getTableHeader().setReorderingAllowed(false);
+//        table_cliente_dependente.setAutoResizeMode(table_cliente_dependente.AUTO_RESIZE_OFF);
+//        table_cliente_dependente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//    }//FIM.
 
     //TABELA CARREGANDO DADOS DEPENDENTES NA GUIA DEPENDENTES
-    public final void tabela_dependente() {
-        spTableDependentes.setVerticalScrollBar(new ScrollBar());
-        spTableDependentes.getVerticalScrollBar().setBackground(Color.WHITE);
-        spTableDependentes.getViewport().setBackground(Color.WHITE);
-
-        JPanel p = new JPanel();
-        p.setBackground(Color.WHITE);
-        spTableDependentes.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-
-        listDependentes = controllerDependetes.returnListDependentesController();
-        DefaultTableModel table = (DefaultTableModel) spTableDependente.getModel();
-        table.setNumRows(0);
-        //Inserir dados na tabela
-        int cont = listDependentes.size();
-        for (int i = 0; i < cont; i++) {
-            table.addRow(new Object[]{
-                listDependentes.get(i).getId(),
-                listDependentes.get(i).getNome_Completo(),
-                listDependentes.get(i).getRg(),
-                listDependentes.get(i).getCpf(),
-                listDependentes.get(i).getIdade_cliente(),
-                listDependentes.get(i).getGenero_cliente(),
-                listDependentes.get(i).getDependencia_cliente()
-            });
-        }
-    }//FIM.
+//    public final void tabela_dependente() {
+//        spTableDependentes.setVerticalScrollBar(new ScrollBar());
+//        spTableDependentes.getVerticalScrollBar().setBackground(Color.WHITE);
+//        spTableDependentes.getViewport().setBackground(Color.WHITE);
+//
+//        JPanel p = new JPanel();
+//        p.setBackground(Color.WHITE);
+//        spTableDependentes.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+//
+//        listDependentes = controllerDependetes.returnListDependentesController();
+//        DefaultTableModel table = (DefaultTableModel) spTableDependente.getModel();
+//        table.setNumRows(0);
+//        //Inserir dados na tabela
+//        int cont = listDependentes.size();
+//        for (int i = 0; i < cont; i++) {
+//            table.addRow(new Object[]{
+//                listDependentes.get(i).getId(),
+//                listDependentes.get(i).getNome_Completo(),
+//                listDependentes.get(i).getRg(),
+//                listDependentes.get(i).getCpf(),
+//                listDependentes.get(i).getIdade_cliente(),
+//                listDependentes.get(i).getGenero_cliente(),
+//                listDependentes.get(i).getDependencia_cliente()
+//            });
+//        }
+//    }//FIM.
 
     //TABELA CARREGANDO DADOS DOS CLIENTES NA GUIA SOCIO_ECONOMICO
-    public final void tabela_cliente_socio_economico(String Sql) {
-        spTableCliente_Socio_Economico.setVerticalScrollBar(new ScrollBar());
-        spTableCliente_Socio_Economico.getVerticalScrollBar().setBackground(Color.WHITE);
-        spTableCliente_Socio_Economico.getViewport().setBackground(Color.WHITE);
-
-        JPanel p = new JPanel();
-        p.setBackground(Color.WHITE);
-        spTableCliente_Socio_Economico.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-
-        ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"ID", "Nome", "RG", "CPF", "DT NASCIMENTO", "TELEFONE", "ESTADO CIVIL", "STATUS"};
-
-        con.getConectar();
-        con.executarSql(Sql);
-        //Inserir dados na tabela
-        try {
-            con.getResultSet().first();
-            do {
-                dados.add(new Object[]{con.getResultSet().getInt("id"), con.getResultSet().getString("nome_Completo"),
-                    con.getResultSet().getString("rg"), con.getResultSet().getString("cpf"),
-                    con.getResultSet().getString("data_Nascimento"), con.getResultSet().getString("telefone"), con.getResultSet().getString("estado_Civil"),
-                    con.getResultSet().getString("status_Cliente")});
-            } while (con.getResultSet().next());
-        } catch (SQLException e) {
-
-        }
-
-        TabelaUniversal tabela = new TabelaUniversal(dados, colunas);
-
-        table_cliente_socio_Economico.setModel(tabela);
-        table_cliente_socio_Economico.getColumnModel().getColumn(0).setPreferredWidth(30);
-        table_cliente_socio_Economico.getColumnModel().getColumn(0).setResizable(false);
-        table_cliente_socio_Economico.getColumnModel().getColumn(1).setPreferredWidth(190);
-        table_cliente_socio_Economico.getColumnModel().getColumn(1).setResizable(false);
-        table_cliente_socio_Economico.getColumnModel().getColumn(2).setPreferredWidth(120);
-        table_cliente_socio_Economico.getColumnModel().getColumn(2).setResizable(false);
-        table_cliente_socio_Economico.getColumnModel().getColumn(3).setPreferredWidth(115);
-        table_cliente_socio_Economico.getColumnModel().getColumn(3).setResizable(false);
-        table_cliente_socio_Economico.getColumnModel().getColumn(4).setPreferredWidth(140);
-        table_cliente_socio_Economico.getColumnModel().getColumn(4).setResizable(false);
-        table_cliente_socio_Economico.getColumnModel().getColumn(5).setPreferredWidth(168);
-        table_cliente_socio_Economico.getColumnModel().getColumn(5).setResizable(false);
-        table_cliente_socio_Economico.getColumnModel().getColumn(6).setPreferredWidth(115);
-        table_cliente_socio_Economico.getColumnModel().getColumn(6).setResizable(false);
-        table_cliente_socio_Economico.getColumnModel().getColumn(7).setPreferredWidth(140);
-        table_cliente_socio_Economico.getColumnModel().getColumn(7).setResizable(false);
-        table_cliente_socio_Economico.getTableHeader().setReorderingAllowed(false);
-        table_cliente_socio_Economico.setAutoResizeMode(table_cliente_socio_Economico.AUTO_RESIZE_OFF);
-        table_cliente_socio_Economico.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    }//FIM.
+//    public final void tabela_cliente_socio_economico(String Sql) {
+//        spTableCliente_Socio_Economico.setVerticalScrollBar(new ScrollBar());
+//        spTableCliente_Socio_Economico.getVerticalScrollBar().setBackground(Color.WHITE);
+//        spTableCliente_Socio_Economico.getViewport().setBackground(Color.WHITE);
+//
+//        JPanel p = new JPanel();
+//        p.setBackground(Color.WHITE);
+//        spTableCliente_Socio_Economico.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+//
+//        ArrayList dados = new ArrayList();
+//        String[] colunas = new String[]{"ID", "Nome", "RG", "CPF", "DT NASCIMENTO", "TELEFONE", "ESTADO CIVIL", "STATUS"};
+//
+//        con.getConectar();
+//        con.executarSql(Sql);
+//        //Inserir dados na tabela
+//        try {
+//            con.getResultSet().first();
+//            do {
+//                dados.add(new Object[]{con.getResultSet().getInt("id"), con.getResultSet().getString("nome_Completo"),
+//                    con.getResultSet().getString("rg"), con.getResultSet().getString("cpf"),
+//                    con.getResultSet().getString("data_Nascimento"), con.getResultSet().getString("telefone"), con.getResultSet().getString("estado_Civil"),
+//                    con.getResultSet().getString("status_Cliente")});
+//            } while (con.getResultSet().next());
+//        } catch (SQLException e) {
+//
+//        }
+//
+//        TabelaUniversal tabela = new TabelaUniversal(dados, colunas);
+//
+//        table_cliente_socio_Economico.setModel(tabela);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(0).setPreferredWidth(30);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(0).setResizable(false);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(1).setPreferredWidth(190);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(1).setResizable(false);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(2).setPreferredWidth(120);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(2).setResizable(false);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(3).setPreferredWidth(115);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(3).setResizable(false);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(4).setPreferredWidth(140);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(4).setResizable(false);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(5).setPreferredWidth(168);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(5).setResizable(false);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(6).setPreferredWidth(115);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(6).setResizable(false);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(7).setPreferredWidth(140);
+//        table_cliente_socio_Economico.getColumnModel().getColumn(7).setResizable(false);
+//        table_cliente_socio_Economico.getTableHeader().setReorderingAllowed(false);
+//        table_cliente_socio_Economico.setAutoResizeMode(table_cliente_socio_Economico.AUTO_RESIZE_OFF);
+//        table_cliente_socio_Economico.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//    }//FIM.
 
     //TABELA CARREGANDO DADOS DOS CLIENTES NA GUIA SOCIO_ECONOMICO_SAUDE
-    public final void tabela_cliente_socio_economico_Saude(String Sql) {
-        spTableCliente_Socio_EconomicoSaude.setVerticalScrollBar(new ScrollBar());
-        spTableCliente_Socio_EconomicoSaude.getVerticalScrollBar().setBackground(Color.WHITE);
-        spTableCliente_Socio_EconomicoSaude.getViewport().setBackground(Color.WHITE);
-
-        JPanel p = new JPanel();
-        p.setBackground(Color.WHITE);
-        spTableCliente_Socio_EconomicoSaude.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-
-        //Inserir dados na tabela
-        ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"ID", "Nome", "CPF", "RG", "IDADE", "SEXO"};
-
-        con.getConectar();
-        con.executarSql(Sql);
-        //Inserir dados na tabela
-        try {
-            con.getResultSet().first();
-            do {
-                dados.add(new Object[]{con.getResultSet().getInt("id_clientes"),
-                    con.getResultSet().getString("nome_cliente"),
-                    con.getResultSet().getString("cpf_cliente"),
-                    con.getResultSet().getString("rg_cliente"),
-                    con.getResultSet().getString("idade_cliente"),
-                    con.getResultSet().getString("genero")});
-            } while (con.getResultSet().next());
-        } catch (SQLException e) {
-
-        }
-
-        TabelaUniversal tabela = new TabelaUniversal(dados, colunas);
-
-        table_cliente_socio_EconomicoSaude.setModel(tabela);
-        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(0).setPreferredWidth(30);
-        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(0).setResizable(false);
-        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(1).setPreferredWidth(190);
-        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(1).setResizable(false);
-        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(2).setPreferredWidth(120);
-        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(2).setResizable(false);
-        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(3).setPreferredWidth(115);
-        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(3).setResizable(false);
-        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(4).setPreferredWidth(140);
-        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(4).setResizable(false);
-        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(5).setPreferredWidth(420);
-        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(5).setResizable(false);
-        table_cliente_socio_EconomicoSaude.getTableHeader().setReorderingAllowed(false);
-        table_cliente_socio_EconomicoSaude.setAutoResizeMode(table_cliente_socio_EconomicoSaude.AUTO_RESIZE_OFF);
-        table_cliente_socio_EconomicoSaude.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    }//FIM.
+//    public final void tabela_cliente_socio_economico_Saude(String Sql) {
+//        spTableCliente_Socio_EconomicoSaude.setVerticalScrollBar(new ScrollBar());
+//        spTableCliente_Socio_EconomicoSaude.getVerticalScrollBar().setBackground(Color.WHITE);
+//        spTableCliente_Socio_EconomicoSaude.getViewport().setBackground(Color.WHITE);
+//
+//        JPanel p = new JPanel();
+//        p.setBackground(Color.WHITE);
+//        spTableCliente_Socio_EconomicoSaude.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+//
+//        //Inserir dados na tabela
+//        ArrayList dados = new ArrayList();
+//        String[] colunas = new String[]{"ID", "Nome", "CPF", "RG", "IDADE", "SEXO"};
+//
+//        con.getConectar();
+//        con.executarSql(Sql);
+//        //Inserir dados na tabela
+//        try {
+//            con.getResultSet().first();
+//            do {
+//                dados.add(new Object[]{con.getResultSet().getInt("id_clientes"),
+//                    con.getResultSet().getString("nome_cliente"),
+//                    con.getResultSet().getString("cpf_cliente"),
+//                    con.getResultSet().getString("rg_cliente"),
+//                    con.getResultSet().getString("idade_cliente"),
+//                    con.getResultSet().getString("genero")});
+//            } while (con.getResultSet().next());
+//        } catch (SQLException e) {
+//
+//        }
+//
+//        TabelaUniversal tabela = new TabelaUniversal(dados, colunas);
+//
+//        table_cliente_socio_EconomicoSaude.setModel(tabela);
+//        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(0).setPreferredWidth(30);
+//        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(0).setResizable(false);
+//        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(1).setPreferredWidth(190);
+//        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(1).setResizable(false);
+//        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(2).setPreferredWidth(120);
+//        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(2).setResizable(false);
+//        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(3).setPreferredWidth(115);
+//        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(3).setResizable(false);
+//        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(4).setPreferredWidth(140);
+//        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(4).setResizable(false);
+//        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(5).setPreferredWidth(420);
+//        table_cliente_socio_EconomicoSaude.getColumnModel().getColumn(5).setResizable(false);
+//        table_cliente_socio_EconomicoSaude.getTableHeader().setReorderingAllowed(false);
+//        table_cliente_socio_EconomicoSaude.setAutoResizeMode(table_cliente_socio_EconomicoSaude.AUTO_RESIZE_OFF);
+//        table_cliente_socio_EconomicoSaude.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//    }//FIM.
 
     //METODO PARA LIMPAR CAMPOS DA TELA CLIENTE
     public void limparCampos() {
@@ -556,22 +556,22 @@ public class CardClientes extends javax.swing.JPanel {
                                     ClientesDao clientesDao = new ClientesDao();
                                     clientesDao.inserirClientesCadastrados();
                                     JOptionPane.showMessageDialog(this, "Salvo com sucesso!");
-                                    tabela_cliente("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
-                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
-                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
-                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
-                                    tabela_cliente_dependente("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
-                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
-                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
-                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
-                                    tabela_cliente_socio_economico("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
-                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
-                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
-                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
-                                    tabela_cliente_socio_economico_Saude("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
-                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
-                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
-                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
+//                                    tabela_cliente("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
+//                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
+//                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
+//                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
+//                                    tabela_cliente_dependente("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
+//                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
+//                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
+//                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
+//                                    tabela_cliente_socio_economico("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
+//                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
+//                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
+//                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
+//                                    tabela_cliente_socio_economico_Saude("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
+//                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
+//                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
+//                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
                                     limparCampos();
                                     desabilitarCampos();
                                     desabilitarBotao();
@@ -655,22 +655,22 @@ public class CardClientes extends javax.swing.JPanel {
                                 boolean resultado = controllerTitular.controlUpdateClientes(titular, endereco);
                                 if (resultado == true) {//CONDIÇÃO PARA MANDAR O RESULTADO PARA O BACK-END, PARA SALVAR
                                     JOptionPane.showMessageDialog(this, "Alterado com sucesso!");
-                                    tabela_cliente("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
-                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
-                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
-                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
-                                    tabela_cliente_dependente("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
-                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
-                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
-                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
-                                    tabela_cliente_socio_economico("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
-                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
-                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
-                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
-                                    tabela_cliente_socio_economico_Saude("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
-                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
-                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
-                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
+//                                    tabela_cliente("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
+//                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
+//                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
+//                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
+//                                    tabela_cliente_dependente("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
+//                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
+//                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
+//                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
+//                                    tabela_cliente_socio_economico("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
+//                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
+//                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
+//                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
+//                                    tabela_cliente_socio_economico_Saude("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
+//                                            + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
+//                                            + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
+//                                            + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id order by nome_Completo");
                                     limparCampos();
                                     desabilitarCampos();
                                     desabilitarBotao();
@@ -727,7 +727,7 @@ public class CardClientes extends javax.swing.JPanel {
                 if (resultado == true) {//CONDIÇÃO PARA MANDAR O RESULTADO PARA O BACK-END, PARA SALVAR
                     JOptionPane.showMessageDialog(this, "Salvo com sucesso!");
                     limparCamposDependentes();
-                    tabela_dependente();
+//                    tabela_dependente();
                 } else {
                     JOptionPane.showMessageDialog(this, "Erro ao Salvar!");
                 }//FIM DA CONDIÇÃO PARA SALVAR.
@@ -815,10 +815,10 @@ public class CardClientes extends javax.swing.JPanel {
         txtnaturalidade.setText((String.valueOf(endereco.getNaturalidade())));
         txtCidade.setText((String.valueOf(endereco.getCidade())));
         txttempomoradia.setText((String.valueOf(endereco.getTempoDeMoradia_cliente())));
-        tabela_cliente("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
-                + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
-                + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
-                + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id where nome_Completo like '%" + titular.getPesquisar() + "%'");
+//        tabela_cliente("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
+//                + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
+//                + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
+//                + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id where nome_Completo like '%" + titular.getPesquisar() + "%'");
     }
 
     public void BuscarTitularDependentePreenchendoTable() {
@@ -828,10 +828,10 @@ public class CardClientes extends javax.swing.JPanel {
         id = Integer.parseInt((String.valueOf(titular.getId())));
         txtNomeClienteTitular.setText((String.valueOf(titular.getNome_Completo())));
 
-        tabela_cliente_dependente("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
-                + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
-                + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
-                + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id where nome_Completo like '%" + titular.getPesquisar() + "%'");
+//        tabela_cliente_dependente("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
+//                + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
+//                + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
+//                + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id where nome_Completo like '%" + titular.getPesquisar() + "%'");
     }
 
     public void BuscarTitularSocioEconomicoPreenchendoTable() {
@@ -840,10 +840,10 @@ public class CardClientes extends javax.swing.JPanel {
         id = Integer.parseInt((String.valueOf(titular.getId())));
         txtNomeClienteTitularSocioEconomico.setText((String.valueOf(titular.getNome_Completo())));
 
-        tabela_cliente_socio_economico("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
-                + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
-                + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
-                + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id where nome_Completo like '%" + titular.getPesquisar() + "%'");
+//        tabela_cliente_socio_economico("select c.id, c.nome_Completo, c.nome_Social, c.cor_cliente, c.nome_Mae, c.telefone, \n"
+//                + "		c.data_Nascimento, c.idade_cliente, c.genero_cliente, c.estado_Civil, c.rg, c.cpf, c.status_Cliente, \n"
+//                + "		e.id, e.cep, e.bairro, e.rua, e.numero, e.referencia, e.nacionalidade, e.naturalidade, e.cidade, e.tempoDeMoradia_cliente\n"
+//                + "	from tb_titular c inner join tb_endereco e on c.id_endereco = e.id where nome_Completo like '%" + titular.getPesquisar() + "%'");
     }
 
     public void BuscarTitularSocioEconomicoSaudePreenchendoTable() {
@@ -852,7 +852,7 @@ public class CardClientes extends javax.swing.JPanel {
         id = Integer.parseInt((String.valueOf(titular.getId())));
         txtNomeClienteTitularSocioEconomicoSaude.setText((String.valueOf(titular.getNome_Completo())));
 
-        tabela_cliente_socio_economico_Saude("select id_clientes, nome_cliente, cpf_cliente, rg_cliente, idade_cliente, genero from tb_clientes where nome_cliente like '%" + titular.getPesquisar() + "%'");
+//        tabela_cliente_socio_economico_Saude("select id_clientes, nome_cliente, cpf_cliente, rg_cliente, idade_cliente, genero from tb_clientes where nome_cliente like '%" + titular.getPesquisar() + "%'");
     }
 
     @SuppressWarnings("unchecked")
@@ -2493,7 +2493,7 @@ public class CardClientes extends javax.swing.JPanel {
         controllerDependetes.controlUpdateDependente(dependentes);
 
         limparCamposDependentes();
-        tabela_dependente();
+//        tabela_dependente();
     }//GEN-LAST:event_btnAlterarDependenteActionPerformed
 
     private void table_clienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_clienteMousePressed

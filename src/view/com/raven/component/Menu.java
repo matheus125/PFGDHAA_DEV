@@ -1,6 +1,8 @@
 package view.com.raven.component;
 
 import com.raven.banco.ConexaoBD;
+import com.raven.swing.icon.GoogleMaterialDesignIcons;
+import com.raven.swing.icon.IconFontSwing;
 import view.com.raven.model.Model_Menu;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -34,6 +36,8 @@ public final class Menu extends javax.swing.JPanel {
         listMenu1.setOpaque(false);
         init();
         preencher();
+        //  Init google icon font
+        IconFontSwing.register(GoogleMaterialDesignIcons.getIconFont());
     }
 
     private void init() {
@@ -175,13 +179,13 @@ public final class Menu extends javax.swing.JPanel {
 
     public void preencher() {
         con.getConectar();
-        con.executarSql("select*from tb_userlogs order by id desc limit 1;");
+        con.executarSql("select*from ultimologin order by cpf_login desc limit 1;");
         try {
             con.getResultSet().last();
 
             do {
-                con.getResultSet().getInt("id");
-                user = con.getResultSet().getString("nome");
+                con.getResultSet().getString("cpf_login");
+                user = con.getResultSet().getString("nome_login");
                 lbuser.setText(user);
             } while (con.getResultSet().next());
 

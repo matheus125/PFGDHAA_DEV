@@ -1,93 +1,122 @@
 package com.raven.model;
 
 public class Usuarios {
-    
-    private int id;
-    private Funcionarios funcionarios;
-    private String login;
-    private String password;
-    private String perfil;
+
+    private String nome_admin;
+    private String cpf_admin;
+    private String email_admin;
+    private String senha_admin;
+    private String telefone_admin;
+    private String cargo_admin;
+    private String pesquisar;
 
     public Usuarios() {
     }
 
-    public Usuarios(int id, Funcionarios funcionarios, String login, String password, String perfil) {
-        this.id = id;
-        this.funcionarios = funcionarios;
-        this.login = login;
-        this.password = password;
-        this.perfil = perfil;
+    public Usuarios(String nome_admin, String cpf_admin, String email_admin, String senha_admin, String telefone_admin, String cargo_admin, String pesquisar) {
+        this.nome_admin = nome_admin;
+        this.cpf_admin = cpf_admin;
+        this.email_admin = email_admin;
+        this.senha_admin = senha_admin;
+        this.telefone_admin = telefone_admin;
+        this.cargo_admin = cargo_admin;
+        this.pesquisar = pesquisar;
     }
-    
     /**
-     * @return the id
+     * @return the nome_admin
      */
-    public int getId() {
-        return id;
+    public String getNome_admin() {
+        return nome_admin;
     }
 
     /**
-     * @param id the id to set
+     * @param nome_admin the nome_admin to set
      */
-    public void setId(int id) {
-        this.id = id;
+    public void setNome_admin(String nome_admin) {
+        this.nome_admin = nome_admin;
     }
 
     /**
-     * @return the funcionarios
+     * @return the cpf_admin
      */
-    public Funcionarios getFuncionarios() {
-        return funcionarios;
+    public String getCpf_admin() {
+        return cpf_admin;
     }
 
     /**
-     * @param funcionarios the funcionarios to set
+     * @param cpf_admin the cpf_admin to set
      */
-    public void setFuncionarios(Funcionarios funcionarios) {
-        this.funcionarios = funcionarios;
+    public void setCpf_admin(String cpf_admin) {
+        this.cpf_admin = cpf_admin;
     }
 
     /**
-     * @return the login
+     * @return the email_admin
      */
-    public String getLogin() {
-        return login;
+    public String getEmail_admin() {
+        return email_admin;
     }
 
     /**
-     * @param login the login to set
+     * @param email_admin the email_admin to set
      */
-    public void setLogin(String login) {
-        this.login = login;
+    public void setEmail_admin(String email_admin) {
+        this.email_admin = email_admin;
     }
 
     /**
-     * @return the password
+     * @return the senha_admin
      */
-    public String getPassword() {
-        return password;
+    public String getSenha_admin() {
+        return senha_admin;
     }
 
     /**
-     * @param password the password to set
+     * @param senha_admin the senha_admin to set
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSenha_admin(String senha_admin) {
+        this.senha_admin = senha_admin;
     }
 
     /**
-     * @return the perfil
+     * @return the telefone_admin
      */
-    public String getPerfil() {
-        return perfil;
+    public String getTelefone_admin() {
+        return telefone_admin;
     }
 
     /**
-     * @param perfil the perfil to set
+     * @param telefone_admin the telefone_admin to set
      */
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
+    public void setTelefone_admin(String telefone_admin) {
+        this.telefone_admin = telefone_admin;
     }
-    
-    
+
+    /**
+     * @return the cargo_admin
+     */
+    public String getCargo_admin() {
+        return cargo_admin;
+    }
+
+    /**
+     * @param cargo_admin the cargo_admin to set
+     */
+    public void setCargo_admin(String cargo_admin) {
+        this.cargo_admin = cargo_admin;
+    }
+
+    /**
+     * @return the pesquisar
+     */
+    public String getPesquisar() {
+        return pesquisar;
+    }
+
+    /**
+     * @param pesquisar the pesquisar to set
+     */
+    public void setPesquisar(String pesquisar) {
+        this.pesquisar = pesquisar;
+    }
 }

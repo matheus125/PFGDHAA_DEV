@@ -50,16 +50,19 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="lb_function" min="-2" pref="82" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="comboFunção" min="-2" pref="173" max="-2" attributes="0"/>
+                                      <Component id="comboPerfil" min="-2" pref="173" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lb_password" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
-                                          <Component id="jLabel6" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="lb_name2" min="-2" pref="83" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="ComboPerfil" min="-2" pref="173" max="-2" attributes="0"/>
-                                          <Component id="txtsenha" min="-2" pref="173" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtemail" max="32767" attributes="0"/>
+                                          <Component id="txtsenha" pref="173" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -108,7 +111,7 @@
                   </Group>
                   <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                       <Component id="lb_function" alignment="0" max="32767" attributes="0"/>
-                      <Component id="comboFunção" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="comboPerfil" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -119,15 +122,15 @@
                   <Component id="txtlogin" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="ComboPerfil" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jLabel6" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="txtFone" min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="lb_name1" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="txtemail" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lb_name2" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnNovo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -183,7 +186,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Cargo:"/>
+        <Property name="text" type="java.lang.String" value="Perfil:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lb_password">
@@ -202,37 +205,12 @@
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="comboFun&#xe7;&#xe3;o">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Gerente"/>
-            <StringItem index="1" value="Supervisor"/>
-            <StringItem index="2" value="Assessor"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="SansSerif" size="14" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Perfil:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="ComboPerfil">
+    <Component class="javax.swing.JComboBox" name="comboPerfil">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="2">
             <StringItem index="0" value="Administrador"/>
-            <StringItem index="1" value="Simples"/>
+            <StringItem index="1" value="Atendente"/>
           </StringArray>
         </Property>
       </Properties>
@@ -403,6 +381,22 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lb_name2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="SansSerif" size="14" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Email:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtemail">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
