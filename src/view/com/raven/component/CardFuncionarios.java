@@ -4,6 +4,7 @@ import view.com.raven.model.CPF;
 import raven.glasspanepopup.GlassPanePopup;
 import com.raven.banco.ConexaoBD;
 import com.raven.controller.ControllerUsuarios;
+import com.raven.dao.UsuariosDao;
 import com.raven.model.Funcionarios;
 import com.raven.model.Usuarios;
 import com.raven.tabelas.TabelaUniversal;
@@ -24,10 +25,12 @@ import view.com.raven.swing.Table;
 
 public final class CardFuncionarios extends javax.swing.JPanel {
 
-    int id, flag = 0;
+    int flag = 0;
+    String id;
 
     ControllerUsuarios controllerUsuarios = new ControllerUsuarios();
     Usuarios usuarios = new Usuarios();
+    UsuariosDao usuariosDao = new UsuariosDao();
 
     ConexaoBD con = new ConexaoBD();
 
@@ -36,9 +39,16 @@ public final class CardFuncionarios extends javax.swing.JPanel {
 
         desabilitarCampos();
         desabilitarBotao();
-//        loadFuncionariosTable("select e.id,e.nome, e.funcao, e.telefone, u.login, u.password, u.perfil \n"
-//                + "	from tb_funcionario e inner join tb_user u on e.id = u.id_funcionario order by nome");
+        loadFuncionariosTable("SELECT a.nome_admin, a.cpf_admin, a.email_admin, a.senha_admin, a.telefone_admin, a.cargo_admin FROM admins a order by nome_admin");
+//92 994261554
+//eduarda puts
 
+//92 988560357
+//Keyla puts
+//92 993251520
+//Prima
+//92 993480332
+//Casa rosa
     }
 
     public void limparCampos() {
@@ -46,16 +56,17 @@ public final class CardFuncionarios extends javax.swing.JPanel {
         txtlogin.setText("");
         txtFone.setText("");
         txtsenha.setText("");
-
+        txtemail.setText("");
     }
 
     public final void desabilitarCampos() {
         txtnome.setEnabled(false);
+        txtemail.setEnabled(false);
         txtlogin.setEnabled(false);
         txtFone.setEnabled(false);
         txtsenha.setEnabled(false);
         comboPerfil.setEnabled(false);
-        
+
     }
 
     public void habilitarCampos() {
@@ -87,19 +98,19 @@ public final class CardFuncionarios extends javax.swing.JPanel {
 
         //DECLARAÇÃO DE VARIÁVEIS PARA VALIDAÇÃO DE CAMPOS
         String Nome, Fone, Login, Password, Email;
-        
+
         Nome = txtnome.getText();
         Fone = txtFone.getText();
         Login = txtlogin.getText();
         Password = txtsenha.getText();
         Email = txtemail.getText();
-        
+
         CPF pf = new CPF(Login);
         //FIM DAS VARIÁVEIS.
         if (controllerUsuarios.controlGetFuncionario(txtlogin.getText()) == false) {//PRIMEIRO IF DE VERIFICAÇÃO DE CPF CADASTRADO
             if (!Nome.isEmpty()) {//PRIMEIRO IF "!Nome"
                 if (txtlogin.getText().equals("   .   .   -  ")) {
-                    JOptionPane.showMessageDialog(this, "Campo LOGIN é Obrigatório!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Campo CPF é Obrigatório!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
                     txtlogin.requestFocus();
                     return;
                 }
@@ -107,28 +118,26 @@ public final class CardFuncionarios extends javax.swing.JPanel {
                     if (!Login.isEmpty()) {//TERCEIRO IF "!Login"
                         if (!Password.isEmpty()) {//QUARTO IF "!Password"
                             if (!Email.isEmpty()) {
-                                
-                            
-                            if (pf.isCPF()) {
-                                usuarios.setNome_admin(Nome);
-                                usuarios.setCargo_admin((String) this.comboPerfil.getSelectedItem());
-                                usuarios.setCpf_admin(Login);
-                                usuarios.setEmail_admin(Email);
-                                usuarios.setSenha_admin(Password);
-                                usuarios.setTelefone_admin(Fone);
-                                controllerUsuarios.controllerSaveClientes(usuarios);
 
-//                                loadFuncionariosTable("select e.id,e.nome, e.funcao, e.telefone, u.login, u.password, u.perfil \n"
-//                                        + "	from tb_funcionario e inner join tb_user u on e.id = u.id_funcionario order by nome");
-                                limparCampos();
-                                desabilitarCampos();
-                                desabilitarBotao();
+                                if (pf.isCPF()) {
+                                    usuarios.setNome_admin(Nome);
+                                    usuarios.setCargo_admin((String) this.comboPerfil.getSelectedItem());
+                                    usuarios.setCpf_admin(Login);
+                                    usuarios.setEmail_admin(Email);
+                                    usuarios.setSenha_admin(Password);
+                                    usuarios.setTelefone_admin(Fone);
+                                    controllerUsuarios.controllerSaveClientes(usuarios);
+                                    loadFuncionariosTable("SELECT a.nome_admin, a.cpf_admin, a.email_admin, a.senha_admin, a.telefone_admin, a.cargo_admin FROM admins a order by nome_admin");
+
+                                    limparCampos();
+                                    desabilitarCampos();
+                                    desabilitarBotao();
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "CPF inválido!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
+                                }
                             } else {
-                                JOptionPane.showMessageDialog(null, "Login inválido!", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
-                            }
-                            } else {
-                             JOptionPane.showMessageDialog(this, "Preencha o campo Email!");
-                            txtemail.requestFocus();
+                                JOptionPane.showMessageDialog(this, "Preencha o campo Email!");
+                                txtemail.requestFocus();
                             }//FIM DO IF "Email".
                         } else {
                             JOptionPane.showMessageDialog(this, "Preencha o campo Password!");
@@ -147,88 +156,89 @@ public final class CardFuncionarios extends javax.swing.JPanel {
                 txtnome.requestFocus();
             } //FIM DO PRIMEIRO IF "!Nome".
         } else {
-            JOptionPane.showMessageDialog(null, "Login já está sendo usado em outra conta!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "CPF já está sendo usado em outra conta!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
             txtlogin.requestFocus();
         }//FIM IF "VERIFICAÇÃO DE CPF"
     }
 
-//    public void updateFuncionarios() {
-//        //DECLARAÇÃO DE VARIÁVEIS PARA VALIDAÇÃO DE CAMPOS
-//        String Nome, Fone, Login, Password;
-//
-//        Nome = txtnome.getText();
-//        Fone = txtFone.getText();
-//        Login = txtlogin.getText();
-//        Password = txtsenha.getText();
-//        //FIM DAS VARIÁVEIS.
-//
-//        if (!Nome.isEmpty()) {//PRIMEIRO IF "!Nome"
-//            if (!Fone.isEmpty()) {//SEGUNDO IF "!Fone"
-//                if (!Login.isEmpty()) {//TERCEIRO IF "!Login"
-//                    if (!Password.isEmpty()) {//QUARTO IF "!Password"
-//                        funcionarios.setId(id);
-//                        funcionarios.setNome(Nome);
-//                        funcionarios.setFuncao((String) this.comboFunção.getSelectedItem());
-//                        funcionarios.setTelefone(Fone);
-////                        usuarios.setLogin(Login);
-////                        usuarios.setPassword(Password);
-////                        usuarios.setPerfil((String) this.ComboPerfil.getSelectedItem());
-//                        controllerFuncionarios.controlUpdateFuncionarios(funcionarios, usuarios);
-//                        loadFuncionariosTable("select e.id,e.nome, e.funcao, e.telefone, u.login, u.password, u.perfil \n"
-//                                + "	from tb_funcionario e inner join tb_user u on e.id = u.id_funcionario order by nome");
-//                        limparCampos();
-//                        desabilitarCampos();
-//                        desabilitarBotao();
-//                    } else {
-//                        JOptionPane.showMessageDialog(this, "Preencha o campo Password!");
-//                        txtsenha.requestFocus();
-//                    }//FIM DO QUARTO IF "!Password".
-//                } else {
-//                    JOptionPane.showMessageDialog(this, "Preencha o campo Login!");
-//                    txtlogin.requestFocus();
-//                }//FIM DO TERCEIRO IF "!Login".
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Preencha o campo Telefone!");
-//                txtFone.requestFocus();
-//            }//FIM DO SEGUNDO IF "!Fone".
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Preencha o campo Nome!");
-//            txtnome.requestFocus();
-//        } //FIM DO PRIMEIRO IF "!Nome".
-//    }
-//
-//    public void excluirFuncionarios() {
-//        desabilitarCampos();
-//        int linha = Tabela_funcionarios_user.getSelectedRow();
-//        String tNome = (String) Tabela_funcionarios_user.getValueAt(linha, 1);
-//        int codigo = (int) Tabela_funcionarios_user.getValueAt(linha, 0);
-//        int opcao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir esse funcionario: \n"
-//                + tNome + "?", "Atenção", JOptionPane.YES_NO_OPTION);
-//        if (opcao == JOptionPane.OK_OPTION) {
-//            boolean resultado = controllerFuncionarios.controlDeleteFuncionarios(codigo);
-//            if (resultado == true) {
-//                JOptionPane.showMessageDialog(this, "Funcionário Excluido com sucesso!");
-//                loadFuncionariosTable("select e.id,e.nome, e.funcao, e.telefone, u.login, u.password, u.perfil \n"
-//                        + "	from tb_funcionario e inner join tb_user u on e.id = u.id_funcionario order by nome");
-//                limparCampos();
-//                desabilitarCampos();
-//                desabilitarBotao();
-//                btnNovo.setEnabled(true);
-//            }
-//        }
-//    }
+    public void updateFuncionarios() {
+        //DECLARAÇÃO DE VARIÁVEIS PARA VALIDAÇÃO DE CAMPOS
+        String Nome, Fone, Login, Password, Email;
+
+        Nome = txtnome.getText();
+        Fone = txtFone.getText();
+        Login = txtlogin.getText();
+        Password = txtsenha.getText();
+        Email = txtemail.getText();
+        //FIM DAS VARIÁVEIS.
+
+        if (!Nome.isEmpty()) {//PRIMEIRO IF "!Nome"
+            if (!Fone.isEmpty()) {//SEGUNDO IF "!Fone"
+                if (!Login.isEmpty()) {//TERCEIRO IF "!Login"
+                    if (!Password.isEmpty()) {//QUARTO IF "!Password"
+                        if (!Email.isEmpty()) {
+                            usuarios.setCpf_admin(id);
+                            usuarios.setNome_admin(Nome);
+                            usuarios.setCargo_admin((String) this.comboPerfil.getSelectedItem());
+                            usuarios.setSenha_admin(Password);
+                            usuarios.setTelefone_admin(Fone);
+                            usuarios.setEmail_admin(Fone);
+                            controllerUsuarios.controllerUpdateClientes(usuarios);
+                            loadFuncionariosTable("SELECT a.nome_admin, a.cpf_admin, a.email_admin, a.senha_admin, a.telefone_admin, a.cargo_admin FROM admins a order by nome_admin");
+                            limparCampos();
+                            desabilitarCampos();
+                            desabilitarBotao();
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Preencha o campo Email!");
+                            txtemail.requestFocus();
+                        }//FIM DO IF "Email".
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Preencha o campo Password!");
+                        txtsenha.requestFocus();
+                    }//FIM DO QUARTO IF "!Password".
+                } else {
+                    JOptionPane.showMessageDialog(this, "Preencha o campo Login!");
+                    txtlogin.requestFocus();
+                }//FIM DO TERCEIRO IF "!Login".
+            } else {
+                JOptionPane.showMessageDialog(this, "Preencha o campo Telefone!");
+                txtFone.requestFocus();
+            }//FIM DO SEGUNDO IF "!Fone".
+        } else {
+            JOptionPane.showMessageDialog(this, "Preencha o campo Nome!");
+            txtnome.requestFocus();
+        } //FIM DO PRIMEIRO IF "!Nome".
+    }
+
+    public void excluirFuncionarios() {
+        desabilitarCampos();
+        int resposta = 0;
+        resposta = JOptionPane.showConfirmDialog(null, "Deseja Realmente Excluir?");
+        if (resposta == JOptionPane.YES_OPTION) {
+            usuarios.setCpf_admin(id);
+            usuariosDao.daoDeleteUsuario(usuarios);
+
+            loadFuncionariosTable("SELECT a.nome_admin, a.cpf_admin, a.email_admin, a.senha_admin, a.telefone_admin, a.cargo_admin FROM admins a order by nome_admin");
+            limparCampos();
+            desabilitarCampos();
+            desabilitarBotao();
+            btnNovo.setEnabled(true);
+
+        }
+    }
 
     public void pesquisarFuncionarios() {
-//        funcionarios.setPesquisar(txtpesquisarfuncionarios.getText());
-//        funcionarios = funcionarioDao.buscarFuncionarios(funcionarios, usuarios);
-//        id = Integer.parseInt((String.valueOf(funcionarios.getId())));
-//        txtnome.setText((String.valueOf(funcionarios.getNome())));
-//        comboFunção.setSelectedItem(funcionarios.getFuncao());
-//        txtFone.setText((String.valueOf(funcionarios.getTelefone())));
-//        txtlogin.setText((String.valueOf(usuarios.getLogin())));
-//        txtsenha.setText((String.valueOf(usuarios.getPassword())));
-//        ComboPerfil.setSelectedItem(usuarios.getPerfil());
-//        loadFuncionariosTable("select e.id,e.nome, e.funcao, e.telefone, u.login, u.password, u.perfil from tb_funcionario e inner join tb_user u on e.id = u.id_funcionario where nome like '%" + funcionarios.getPesquisar() + "%'");
+        usuarios.setPesquisar(txtpesquisarfuncionarios.getText());
+        usuarios = usuariosDao.buscarFuncionarios(usuarios);
+        id = ((String.valueOf(usuarios.getCpf_admin())));
+        txtnome.setText((String.valueOf(usuarios.getNome_admin())));
+        txtlogin.setText((String.valueOf(usuarios.getCpf_admin())));
+        comboPerfil.setSelectedItem(usuarios.getCargo_admin());
+        txtFone.setText((String.valueOf(usuarios.getTelefone_admin())));
+        txtlogin.setText((String.valueOf(usuarios.getEmail_admin())));
+        txtsenha.setText((String.valueOf(usuarios.getSenha_admin())));
+        txtemail.setText((String.valueOf(usuarios.getEmail_admin())));
+        loadFuncionariosTable("select a.nome_admin, a.cpf_admin, a.email_admin, a.senha_admin, a.telefone_admin, a.cargo_admin from admins a where nome_admin like '%" + usuarios.getPesquisar() + "%'");
     }
 
     public void loadFuncionariosTable(String Sql) {
@@ -240,7 +250,7 @@ public final class CardFuncionarios extends javax.swing.JPanel {
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
 
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"ID", "Nome", "Função", "Telefone", "Login", "Perfil"};
+        String[] colunas = new String[]{"Nome", "CPF", "Email", "Telefone", "Perfil"};
 
         con.getConectar();
         con.executarSql(Sql);
@@ -248,9 +258,8 @@ public final class CardFuncionarios extends javax.swing.JPanel {
         try {
             con.getResultSet().first();
             do {
-                dados.add(new Object[]{con.getResultSet().getInt("id"), con.getResultSet().getString("nome"),
-                    con.getResultSet().getString("funcao"), con.getResultSet().getString("telefone"),
-                    con.getResultSet().getString("login"), con.getResultSet().getString("perfil")});
+                dados.add(new Object[]{con.getResultSet().getString("nome_admin"), con.getResultSet().getString("cpf_admin"),
+                    con.getResultSet().getString("email_admin"), con.getResultSet().getString("telefone_admin"), con.getResultSet().getString("cargo_admin")});
             } while (con.getResultSet().next());
         } catch (SQLException e) {
 
@@ -259,18 +268,16 @@ public final class CardFuncionarios extends javax.swing.JPanel {
         TabelaUniversal tabela = new TabelaUniversal(dados, colunas);
 
         Tabela_funcionarios_user.setModel(tabela);
-        Tabela_funcionarios_user.getColumnModel().getColumn(0).setPreferredWidth(30);
+        Tabela_funcionarios_user.getColumnModel().getColumn(0).setPreferredWidth(190);
         Tabela_funcionarios_user.getColumnModel().getColumn(0).setResizable(false);
-        Tabela_funcionarios_user.getColumnModel().getColumn(1).setPreferredWidth(190);
+        Tabela_funcionarios_user.getColumnModel().getColumn(1).setPreferredWidth(140);
         Tabela_funcionarios_user.getColumnModel().getColumn(1).setResizable(false);
-        Tabela_funcionarios_user.getColumnModel().getColumn(2).setPreferredWidth(120);
+        Tabela_funcionarios_user.getColumnModel().getColumn(2).setPreferredWidth(150);
         Tabela_funcionarios_user.getColumnModel().getColumn(2).setResizable(false);
         Tabela_funcionarios_user.getColumnModel().getColumn(3).setPreferredWidth(115);
         Tabela_funcionarios_user.getColumnModel().getColumn(3).setResizable(false);
         Tabela_funcionarios_user.getColumnModel().getColumn(4).setPreferredWidth(140);
         Tabela_funcionarios_user.getColumnModel().getColumn(4).setResizable(false);
-        Tabela_funcionarios_user.getColumnModel().getColumn(5).setPreferredWidth(168);
-        Tabela_funcionarios_user.getColumnModel().getColumn(5).setResizable(false);
         Tabela_funcionarios_user.getTableHeader().setReorderingAllowed(false);
         Tabela_funcionarios_user.setAutoResizeMode(Table.AUTO_RESIZE_OFF);
         Tabela_funcionarios_user.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -468,9 +475,8 @@ public final class CardFuncionarios extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lb_password, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lb_name2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                            .addComponent(lb_name2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtemail)
                                             .addComponent(txtsenha, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)))))
@@ -494,8 +500,8 @@ public final class CardFuncionarios extends javax.swing.JPanel {
                                         .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(156, 156, 156)
-                        .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(166, Short.MAX_VALUE))
+                        .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -543,26 +549,26 @@ public final class CardFuncionarios extends javax.swing.JPanel {
         btnAlterar.setEnabled(true);
         btnRemover.setEnabled(true);
         btnCancelar.setEnabled(true);
-        String nome = "" + Tabela_funcionarios_user.getValueAt(Tabela_funcionarios_user.getSelectedRow(), 1);
+        String nome = "" + Tabela_funcionarios_user.getValueAt(Tabela_funcionarios_user.getSelectedRow(), 0);
         con.getConectar();
-        con.executarSql("select e.id, e.nome, e.funcao, e.telefone, u.login, u.password, u.perfil\n"
-                + "		from tb_funcionario e inner join tb_user u on e.id = u.id_funcionario where nome ='" + nome + "'");
+        con.executarSql("SELECT * FROM admins where nome_admin ='" + nome + "'");
         try {
             con.getResultSet().first();
-            id = Integer.parseInt(con.getResultSet().getString("id"));
-            txtnome.setText(con.getResultSet().getString("nome"));
-            comboPerfil.setSelectedItem(con.getResultSet().getString("funcao"));
-            txtFone.setText(con.getResultSet().getString("telefone"));
-            txtlogin.setText(con.getResultSet().getString("login"));
-            txtsenha.setText(con.getResultSet().getString("password"));
-           
+            id = con.getResultSet().getString("cpf_admin");
+            txtnome.setText(con.getResultSet().getString("nome_admin"));
+            txtemail.setText(con.getResultSet().getString("email_admin"));
+            comboPerfil.setSelectedItem(con.getResultSet().getString("cargo_admin"));
+            txtFone.setText(con.getResultSet().getString("telefone_admin"));
+            txtlogin.setText(con.getResultSet().getString("cpf_admin"));
+            txtsenha.setText(con.getResultSet().getString("senha_admin"));
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro no ao selecionar os dados" + ex);
         }
     }//GEN-LAST:event_Tabela_funcionarios_userMouseClicked
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-//        excluirFuncionarios();
+        excluirFuncionarios();
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -578,7 +584,7 @@ public final class CardFuncionarios extends javax.swing.JPanel {
         if (flag == 1) {
             saveFuncionarios();
         } else {
-//            updateFuncionarios();
+            updateFuncionarios();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
